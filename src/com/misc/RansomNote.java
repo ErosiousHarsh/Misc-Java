@@ -19,10 +19,7 @@ public class RansomNote {
             }
             mag_count.put(c, mag_count.get(c) -1);
         }
-        if(check)
-            System.out.println("Yes");
-        else
-            System.out.println("No");
+        System.out.println((check) ? "Yes" : "No");
 
     }
 
