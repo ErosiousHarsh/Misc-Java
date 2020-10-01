@@ -11,8 +11,7 @@ public class TwoStrings {
         char[] c2 = s2.toCharArray();
 
         for(char c: c1){
-            if(!unique.contains(c))
-                unique.add(c);
+            unique.add(c);
         }
 
         for (char c : c2) {
