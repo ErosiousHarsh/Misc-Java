@@ -17,20 +17,19 @@ public class CountTriplets {
 
         long c = 0;
 
-        for(int i=0; i<arr.size(); i++) {
-            long mid = arr.get(i);
-            long c1 = 0,c3 = 0;
+        for (long mid : arr) {
+            long c1 = 0, c3 = 0;
 
             count.put(mid, count.getOrDefault(mid, 0) - 1);
 
-            if(check.containsKey(mid / r) && mid % r == 0)
+            if (check.containsKey(mid / r) && mid % r == 0)
                 c1 = check.get(mid / r);
-            if(count.containsKey(mid * r))
+            if (count.containsKey(mid * r))
                 c3 = count.get(mid * r);
-            System.out.println(c+" += "+c1+" * "+c3+" = "+c1*c3);
+            System.out.println(c + " += " + c1 + " * " + c3 + " = " + c1 * c3);
             c += c1 * c3;
 
-            check.put(mid, check.getOrDefault(mid, 0)+1);
+            check.put(mid, check.getOrDefault(mid, 0) + 1);
         }
 
         return c;
