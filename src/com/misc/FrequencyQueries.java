@@ -20,8 +20,10 @@ public class FrequencyQueries {
         int key,value;
 
         for(int i=0; i<queries.size(); i++) {
+
             key = queries.get(i).get(0);
             value = queries.get(i).get(1);
+
             if(key == 1) {
                 freq.put(value, freq.getOrDefault(value, 0) +1);
             }
@@ -34,11 +36,14 @@ public class FrequencyQueries {
                 }
             }
             else if(key == 3) {
-                ArrayList<Integer> cache = new ArrayList<>(freq.values());
-                if(cache.contains(value))
-                    ans.add(1);
-                else
+                if(value > queries.size())
                     ans.add(0);
+                else {
+                    if (freq.containsValue(value))
+                        ans.add(1);
+                    else
+                        ans.add(0);
+                }
             }
         }
         return  ans;
