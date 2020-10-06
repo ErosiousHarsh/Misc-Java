@@ -13,33 +13,32 @@ import static java.util.stream.Collectors.toList;
 
 public class FrequencyQueries {
 
-    static List<Long> freqQuery(List<List<Long>> queries) {
-        List<Long> ans = new ArrayList<>();
-        List<Long> cache = new ArrayList<>();
-        HashMap<Long,Long> freq = new HashMap<>();
+    static List<Integer> freqQuery(List<List<Integer>> queries) {
+        List<Integer> ans = new ArrayList<>();
+        HashMap<Integer,Integer> freq = new HashMap<>();
 
-        long key,value,c=0;
+        int key,value;
 
         for(int i=0; i<queries.size(); i++) {
             key = queries.get(i).get(0);
             value = queries.get(i).get(1);
             if(key == 1) {
-                cache.clear();
-                freq.put(value, freq.getOrDefault(value, 0L) +1L);
-                cache.add(freq.get(value));
+                freq.put(value, freq.getOrDefault(value, 0) +1);
             }
             else if(key == 2) {
-                if(freq.containsValue(value)) {
-                    cache.clear();
-                    freq.put(value, freq.getOrDefault(value, 0L) - 1L);
-                    cache.add(freq.get(value));
+                if(freq.containsKey(value)) {
+                    if(freq.get(value) == 1)
+                        freq.remove(value);
+                    else
+                        freq.put(value, freq.getOrDefault(value, 0) - 1);
                 }
             }
             else if(key == 3) {
-                if(cache.contains(value) || freq.containsValue(value))
-                    ans.add((long) 1);
+                ArrayList<Integer> cache = new ArrayList<>(freq.values());
+                if(cache.contains(value))
+                    ans.add(1);
                 else
-                    ans.add((long) 0);
+                    ans.add(0);
             }
         }
         return  ans;
@@ -48,15 +47,15 @@ public class FrequencyQueries {
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
-        long q = Integer.parseInt(bufferedReader.readLine().trim());
+        int q = Integer.parseInt(bufferedReader.readLine().trim());
 
-        List<List<Long>> queries = new ArrayList<>();
+        List<List<Integer>> queries = new ArrayList<>();
 
         IntStream.range(0, (int) q).forEach(i -> {
             try {
                 queries.add(
                         Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
-                                .map(Long::parseLong)
+                                .map(Integer::parseInt)
                                 .collect(toList())
                 );
             } catch (IOException ex) {
@@ -64,9 +63,9 @@ public class FrequencyQueries {
             }
         });
 
-        List<Long> ans = freqQuery(queries);
+        List<Integer> ans = freqQuery(queries);
 
-        for(Long a: ans) {
+        for(Integer a: ans) {
             System.out.println(a);
         }
 
