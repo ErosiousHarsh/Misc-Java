@@ -46,8 +46,6 @@ public class CountTriplets {
 
         List<Long> arr = Arrays.stream(Sc.nextLine().split(" ")).map(Long::parseLong).collect(toList());
 
-        List<Long> narr = new ArrayList<>();
-
         System.out.print(countTriplets(arr, r));
 
     }
