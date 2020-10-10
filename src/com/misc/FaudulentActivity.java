@@ -42,7 +42,7 @@ class FaudulentActivity {
         int n = Integer.parseInt(dn[0]);
         int d = Integer.parseInt(dn[1]);
 
-        String[] ex = new String[d];
+        String[] ex = new String[n];
         ex = Sc.nextLine().split(" ");
 
         int[] expen = new int[n];
